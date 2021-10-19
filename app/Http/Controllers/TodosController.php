@@ -28,7 +28,7 @@ class TodosController extends Controller
     public function all()
     {
         try {
-            $users = User::paginate(10);
+            $users = User::with(['posts', 'todos'])->get();
             if ($users->count() > 0) {
                 return UserResource::collection($users);
             } else {
